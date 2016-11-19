@@ -2,3 +2,4 @@
 
 ### Project for Third Year Data Representation and Querying 2016. The task is to create a single page web application in Python.
 
+My webapp will generate a password with the users desired amount of characters which will include numbers, letters and other ascii characters
