@@ -1,10 +1,29 @@
 import flask as fl
+import sqlite3
 
 import string
 import random
 import json
 
+DATABASE = 'data/passwordData.db'
+
 app = fl.Flask(__name__)
+
+###################################################
+
+def get_db():
+  db = getattr(fl.g, '_database', None)
+  if db is None:
+    db = fl.g._database = sqlite3.connect(DATABASE)
+  return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+  db = getattr(fl.g, '_database', None)
+  if db is not None:
+    db.close()
+    
+################################################### 
 
 #size = (fl.request.values["userinput"])
 
