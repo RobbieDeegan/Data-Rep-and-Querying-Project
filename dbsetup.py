@@ -6,16 +6,16 @@ DATABASE = 'data/passwordData.db'
 
 conn = sqlite3.connect('data/passwordData.db')
 
-def setup_db():
+def setupDataBase():
     c = conn.cursor()
 
     # Create table
     c.execute("CREATE TABLE IF NOT EXISTS passwordTable(password TEXT)")
 
-    # Insert placeholder information
+    # Insert sample information
     c.execute("INSERT INTO passwordTable(password) VALUES('HkfQAFta~s')")
 
-    # Commit changes
+    # Commit changes to the database
     conn.commit()
 
     # Close connection

@@ -53,11 +53,13 @@
                 $("#submit").click(function(e) {
                     e.preventDefault();
 
+                    // Getting userinput and sending to Python function to get a password 
                     data = {userinput: $("#userinput").val()}
                     $.post("/password", data, function(resbody){
                         $("#output").text(resbody);
                     });
-
+                    
+                    // Getting old passwords from the database
                     $.post("/oldPassword", data, function(resbody){
                         $("#previous").text(resbody);
                     });
