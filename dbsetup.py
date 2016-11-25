@@ -1,22 +1,25 @@
-# Adapted from https://github.com/data-representation/example-sqlite
+# Adapted from https://docs.python.org/2/library/sqlite3.html
 
 import sqlite3
 
 DATABASE = 'data/passwordData.db'
 
+conn = sqlite3.connect('data/passwordData.db')
+
 def setup_db():
-  db = sqlite3.connect(DATABASE)
-  cur = db.cursor()
+    c = conn.cursor()
 
-  # Create the table if it doesn't exist.
-  cur.execute("CREATE TABLE IF NOT EXISTS passwordTable(password TEXT)")
-  db.commit()
+    # Create table
+    c.execute("CREATE TABLE IF NOT EXISTS passwordTable(password TEXT)")
 
-  # Insert some dummy data if the table is empty.
-  cur.execute("SELECT COUNT(*) FROM passwordTable")
-  if cur.fetchall()[0][0] == 0:
-    cur.execute('INSERT INTO passwordTable(password) VALUES("HkfQAFta~s")')
-    db.commit()
+    # Insert placeholder information
+    c.execute("INSERT INTO passwordTable(password) VALUES('HkfQAFta~s')")
 
+    # Commit changes
+    conn.commit()
+
+    # Close connection
+    conn.close()
+    
 if __name__ == "__main__":
-  setup_db()
+    setup_db()

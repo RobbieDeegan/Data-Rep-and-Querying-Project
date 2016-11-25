@@ -11,31 +11,33 @@ app = fl.Flask(__name__)
 
 ###################################################
 
-def get_db():
-  db = getattr(fl.g, '_database', None)
-  if db is None:
-    db = fl.g._database = sqlite3.connect(DATABASE)
-  return db
-
-@app.teardown_appcontext
-def close_connection(exception):
-  db = getattr(fl.g, '_database', None)
-  if db is not None:
-    db.close()
+def getDataBase():
+    db = getattr(fl.g, '_database', None)
+    if db is None:
+        db = fl.g._database = sqlite3.connect(DATABASE)
+        return db
     
 ################################################### 
 
 #size = (fl.request.values["userinput"])
+#size = request.GET["userinput"]
 
 @app.route("/")
 def root():
     return app.send_static_file('index.html')
 
 @app.route("/password", methods=["GET", "POST"])
-
 # Code for generating randomly found from: http://www.practicepython.org/solution/2014/06/06/16-password-generator-solutions.html
 def passwordGen(size = 10, chars = string.ascii_letters + string.digits + string.punctuation):
     return ''.join(random.choice(chars) for _ in range(size))
+
+# Code to display all passwords saved to the database
+# Adapted from https://github.com/data-representation/example-sqlite
+@app.route("/oldPassword", methods=["GET", "POST"])
+def previousPasswords():
+    cur = getDataBase().cursor()
+    cur.execute("SELECT password FROM passwordTable") 
+    return str(cur.fetchall())
 
 if __name__ == "__main__":
     app.run()
