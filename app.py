@@ -4,6 +4,7 @@ import sqlite3
 import string
 import random
 import json
+from flask import request
 
 DATABASE = 'data/passwordData.db'
 
@@ -22,7 +23,7 @@ def getDataBase():
 ################################################### 
 
 #size = (fl.request.values["userinput"])
-#size = request.GET["userinput"]
+
 
 @app.route("/")
 def root():
@@ -30,8 +31,21 @@ def root():
 
 # Code for generating randomly found from: http://www.practicepython.org/solution/2014/06/06/16-password-generator-solutions.html
 @app.route("/password", methods=["GET", "POST"])
-def passwordGen(size = 10, chars = string.ascii_letters + string.digits + string.punctuation):
-    return ''.join(random.choice(chars) for _ in range(size))
+def passwordGen(size = 15, chars = string.ascii_letters + string.digits + string.punctuation):
+    password = ''.join(random.choice(chars) for _ in range(size))
+    return password
+
+    c = getDataBase().cursor()
+    c = conn.cursor()
+
+    # Insert sample information
+    c.execute("INSERT INTO passwordTable(password) VALUES('%s')", password)
+
+    # Commit changes to the database
+    conn.commit()
+
+    # Close connection
+    conn.close()
 
 # Code to display all passwords saved to the database
 # Adapted from https://github.com/data-representation/example-sqlite
