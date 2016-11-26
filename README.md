@@ -9,7 +9,7 @@ The application is written using the [Flask](http://flask.pocoo.org/) library in
 Both must be installed to run the project.
 
 The [sqlite3](https://docs.python.org/2/library/sqlite3.html) package was used for the database side of the project and must be installed.
-No further configuration our setup is required it is all included in the 
+No further configuration or setup is required it is all included in the imports in the python code.
 
 When you have the above installed, you must setup the database to hold the passwords. This is will be made in the data folder. Then
 run the app and view the webapp locally at http://127.0.0.1:5000/ in your browser 
