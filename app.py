@@ -4,7 +4,7 @@ import sqlite3
 import string
 import random
 import json
-from flask import request
+
 
 DATABASE = 'data/passwordData.db'
 
@@ -22,37 +22,37 @@ def getDataBase():
     
 ################################################### 
 
-#size = (fl.request.values["userinput"])
-
-
 @app.route("/")
 def root():
     return app.send_static_file('index.html')
 
-# Code for generating randomly found from: http://www.practicepython.org/solution/2014/06/06/16-password-generator-solutions.html
+# Code for generating randomly adapted from: http://www.practicepython.org/solution/2014/06/06/16-password-generator-solutions.html
 @app.route("/password", methods=["GET", "POST"])
-def passwordGen(size = 15, chars = string.ascii_letters + string.digits + string.punctuation):
+def passwordGen(size = (random.randint(6,20)), chars = string.ascii_letters + string.digits + string.punctuation):
     password = ''.join(random.choice(chars) for _ in range(size))
-    return password
+    # print (size)
+    
+    conn = sqlite3.connect('data/passwordData.db')
+    cur = conn.cursor()
 
-    c = getDataBase().cursor()
-    c = conn.cursor()
-
-    # Insert sample information
-    c.execute("INSERT INTO passwordTable(password) VALUES('%s')", password)
+    # Insert new password generated
+    cur.execute("INSERT INTO passwordTable(password) VALUES(?)", [password])
 
     # Commit changes to the database
     conn.commit()
-
-    # Close connection
-    conn.close()
+    
+    # Output password to screen
+    return password
 
 # Code to display all passwords saved to the database
 # Adapted from https://github.com/data-representation/example-sqlite
 @app.route("/oldPassword", methods=["GET", "POST"])
 def previousPasswords():
-    cur = getDataBase().cursor()
-    cur.execute("SELECT password FROM passwordTable") 
+    
+    # Displaying all old passwords in the database
+    conn = sqlite3.connect('data/passwordData.db')
+    cur = conn.cursor()
+    cur.execute("SELECT password FROM passwordTable")
     return str(cur.fetchall())
 
 if __name__ == "__main__":

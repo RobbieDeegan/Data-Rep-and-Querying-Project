@@ -5,6 +5,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Random Password Generator</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     </head>
@@ -24,9 +27,8 @@
             <!-- Adapted from: http://v4-alpha.getbootstrap.com/components/forms/#textual-inputs -->
             <form>
                 <div class="form-group">
-                    <label for="name">Insert how many Characters you would like in your password and one will be generated for you
-                        with numbers, letters(upper and lower case) and other ascii characters included in it</label>
-                    <input type="text" class="form-control" name="userinput" id="userinput" placeholder="Enter how many characters you want in your password...">
+                    <label align="center">Hit the generate button to get a password with between 6 and 20 random characters
+                        including numbers, letters(upper and lower case) and other ascii characters included in it</label>
                 </div>
                 <center><button type="submit" id="submit" class="btn btn-success btn-lg">Generate your Password!</button></center>
             </form>
@@ -36,8 +38,7 @@
             <form>
                 <!-- Text area to display the password -->
                 <div class="form-group">
-                    <h2 align="center" id="output"></h2>
-                    <!-- <textarea class="form-control" id="output" placeholder="Password will show here..."></textarea> -->
+                    <h1 align="center" id="output"></h1>
                     
                     <br/><br/>
                     
@@ -54,7 +55,7 @@
                 $("#submit").click(function(e) {
                     e.preventDefault();
 
-                    // Getting userinput and sending to Python function to get a password 
+                    // Sending request for a password
                     data = {userinput: $("#userinput").val()}
                     $.post("/password", data, function(resbody){
                         $("#output").text(resbody);
@@ -64,6 +65,7 @@
                     $.post("/oldPassword", data, function(resbody){
                         $("#previous").text(resbody);
                     });
+                
                 });
             </script>
         </div>
