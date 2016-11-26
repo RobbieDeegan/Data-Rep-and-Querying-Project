@@ -36,7 +36,7 @@ def passwordGen(size = (random.randint(6,20)), chars = string.ascii_letters + st
     cur = conn.cursor()
 
     # Insert new password generated
-    cur.execute("INSERT INTO passwordTable(password) VALUES(?)", [password])
+    cur.execute("INSERT INTO passwordTable(password) VALUES(?)", [' Password: ' + password + '   '])
 
     # Commit changes to the database
     conn.commit()

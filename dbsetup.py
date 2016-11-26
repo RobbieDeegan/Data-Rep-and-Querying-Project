@@ -13,7 +13,7 @@ def setupDataBase():
     c.execute("CREATE TABLE IF NOT EXISTS passwordTable(password TEXT)")
 
     # Insert sample information
-    c.execute("INSERT INTO passwordTable(password) VALUES('HkfQAFta~s')")
+    c.execute("INSERT INTO passwordTable(password) VALUES('Example: HkfQAFta~s')")
 
     # Commit changes to the database
     conn.commit()

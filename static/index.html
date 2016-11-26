@@ -22,13 +22,12 @@
         </nav>
 
         <div class="container">
-
             <br/>
-            <!-- Adapted from: http://v4-alpha.getbootstrap.com/components/forms/#textual-inputs -->
             <form>
                 <div class="form-group">
                     <label align="center">Hit the generate button to get a password with between 6 and 20 random characters
-                        including numbers, letters(upper and lower case) and other ascii characters included in it</label>
+                        including numbers, letters(upper and lower case) and other ascii characters included in it. Keep pressing the
+                        button to get more passwords. All passwords will be saved to a database</label>
                 </div>
                 <center><button type="submit" id="submit" class="btn btn-success btn-lg">Generate your Password!</button></center>
             </form>
@@ -41,8 +40,9 @@
                     <h1 align="center" id="output"></h1>
                     
                     <br/><br/>
-                    
-                    <textarea class="form-control" id="previous" placeholder="Previous Passwords"></textarea>
+                    <h5 align="center">All previous passwords saved to the database will be outputted below..</h5>
+                    <textarea class="form-control" id="previous" rows="10" placeholder="Previous Passwords"></textarea>
+                    <br/>
                 </div>
             </form>
 
@@ -65,8 +65,8 @@
                     $.post("/oldPassword", data, function(resbody){
                         $("#previous").text(resbody);
                     });
-                
                 });
+                
             </script>
         </div>
     </body>
