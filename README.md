@@ -9,6 +9,8 @@ An 8-character password with letters (upper & lower case) and includes numbers a
 This webapp will generate a password with a random amount of characters between 6 and 20 which will include numbers, letters(upper and lower case) and other ascii characters. It will also save all passwords generated to a database and display them all in the web app.
 
 ### How to run the application
+Clone the files or download the zip file to your machine.
+
 The application is written using the [Flask](http://flask.pocoo.org/) library in [Python 3](https://www.python.org).
 Both must be installed to run the project.
 
