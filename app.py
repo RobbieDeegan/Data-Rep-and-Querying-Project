@@ -5,7 +5,6 @@ import string
 import random
 import json
 
-
 DATABASE = 'data/passwordData.db'
 
 app = fl.Flask(__name__)
@@ -35,7 +34,7 @@ def passwordGen(size = (random.randint(6,20)), chars = string.ascii_letters + st
     conn = sqlite3.connect('data/passwordData.db')
     cur = conn.cursor()
 
-    # Insert new password generated
+    # Insert new password generated into the database
     cur.execute("INSERT INTO passwordTable(password) VALUES(?)", [' Password: ' + password + '   '])
 
     # Commit changes to the database
@@ -43,6 +42,8 @@ def passwordGen(size = (random.randint(6,20)), chars = string.ascii_letters + st
     
     # Output password to screen
     return password
+
+###################################################
 
 # Code to display all passwords saved to the database
 # Adapted from https://github.com/data-representation/example-sqlite
