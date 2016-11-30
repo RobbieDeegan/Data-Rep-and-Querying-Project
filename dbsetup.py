@@ -1,3 +1,5 @@
+# Robert Deegan
+
 # Adapted from https://docs.python.org/2/library/sqlite3.html
 import sqlite3
 
