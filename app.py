@@ -2,7 +2,6 @@
 
 import flask as fl
 import sqlite3
-
 import string
 import random
 import json
@@ -31,7 +30,6 @@ def root():
 @app.route("/password", methods=["GET", "POST"])
 def passwordGen(size = (random.randint(6,20)), chars = string.ascii_letters + string.digits + string.punctuation):
     password = ''.join(random.choice(chars) for _ in range(size))
-    # print (size)
     
     conn = sqlite3.connect('data/passwordData.db')
     cur = conn.cursor()
